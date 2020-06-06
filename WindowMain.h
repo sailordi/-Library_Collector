@@ -24,7 +24,11 @@ class WindowMain : public QMainWindow
 {
     Q_OBJECT
 public:
-    WindowMain(QWidget *parent = nullptr);
+    /*! Constructor
+     * \param parent - The windows parent [Default: nullptr]
+    */
+    explicit WindowMain(QWidget *parent = nullptr);
+    /*! Deconstructor */
     ~WindowMain();
 
 private slots:
