@@ -1,6 +1,7 @@
 #include "Collector.h"
 
 #include <QDir>
+#include <QFileInfo>
 
 //Public functions
 Collector::Collector(QString fromPath,QString toPath,QStringList suffix,bool createDirs) {
@@ -49,5 +50,22 @@ void Collector::createPath(QString path) {
         if(d.exists() == false) {
             d.mkdir(path);
         }
+}
+
+//Private functions
+void Collector::dir(QFileInfo i) {
+    if(i.isDir() == false) {
+        return;
+    }
+
+    QString n = (this->v_createDirs == false) ? "" : i.baseName();
+    QString toP = Collector::formatOutPath(this->v_toPath,n);
+    QString fromP = i.absolutePath()+SLASH+i.baseName()+SLASH;
+
+    if(this->v_createDirs == true) {
+        Collector::createPath(toP);
+    }
+
+
 }
 
