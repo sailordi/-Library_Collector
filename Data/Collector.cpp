@@ -11,3 +11,18 @@ Collector::Collector(QString fromPath,QString toPath,QStringList suffix,bool cre
 Collector::~Collector() {
 
 }
+
+bool Collector::canCollect() {
+    if(this->v_fromPath.isEmpty() == true) {
+        return false;
+    }
+    if(this->v_toPath.isEmpty() == true) {
+        return false;
+    }
+    if(this->v_toPath.compare(SLASH) == 0) {
+        return false;
+    }
+
+    return true;
+}
+

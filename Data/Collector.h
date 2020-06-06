@@ -4,6 +4,8 @@
 #include <QString>
 #include <QStringList>
 
+const QString SLASH = "/";
+
 /*! \class Collector
  * \brief The class will collect the nessesery info
  *
@@ -29,6 +31,11 @@ public:
     Collector(QString fromPath,QString toPath,QStringList suffix,bool createDirs = true);
     /*! Deconstructor */
     ~Collector();
+
+    /*! Checks if collection can be preformed
+     * @returns bool
+    */
+    bool canCollect();
 
 private:
     QString v_fromPath = "",v_toPath = "";
