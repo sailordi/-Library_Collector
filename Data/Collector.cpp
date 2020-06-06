@@ -2,6 +2,7 @@
 
 #include <QDir>
 #include <QFileInfo>
+#include <QFileInfoList>
 
 //Public functions
 Collector::Collector(QString fromPath,QString toPath,QStringList suffix,bool createDirs) {
@@ -52,6 +53,18 @@ void Collector::createPath(QString path) {
         }
 }
 
+void Collector::collect() {
+    QDir d(this->v_fromPath);
+    QFileInfoList l = d.entryInfoList(QDir::AllEntries|QDir::NoDotAndDotDot);
+
+        for(int i = 0; i < l.size(); i++) {
+            QFileInfo fI = l.at(i);
+
+            this->dir(fI);
+            this->file(fI);
+        }
+}
+
 //Private functions
 void Collector::dir(QFileInfo i) {
     if(i.isDir() == false) {
@@ -65,8 +78,9 @@ void Collector::dir(QFileInfo i) {
     if(this->v_createDirs == true) {
         Collector::createPath(toP);
     }
+    Collector c(fromP,toP,this->v_suffix,this->v_createDirs);
 
-
+    c.collect();
 }
 
 void Collector::file(QFileInfo i) {
