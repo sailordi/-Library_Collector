@@ -1,5 +1,7 @@
 #include "Collector.h"
 
+#include <QDir>
+
 //Public functions
 Collector::Collector(QString fromPath,QString toPath,QStringList suffix,bool createDirs) {
     this->v_fromPath = fromPath;
@@ -39,5 +41,13 @@ QString Collector::formatOutPath(QString dirPath,QString dirName) {
     }
 
     return dirPath+SLASH+dirName+SLASH;
+}
+
+void Collector::createPath(QString path) {
+    QDir d(path);
+
+        if(d.exists() == false) {
+            d.mkdir(path);
+        }
 }
 
