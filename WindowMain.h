@@ -27,6 +27,10 @@ public:
     WindowMain(QWidget *parent = nullptr);
     ~WindowMain();
 
+private slots:
+    /*! Slot that is activated when output path selection button is clicked */
+    void libraryOutPathBtnClicked();
+
 private:
     Ui::WindowMain* v_ui = nullptr;
 
