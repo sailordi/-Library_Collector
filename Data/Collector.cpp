@@ -26,3 +26,18 @@ bool Collector::canCollect() {
     return true;
 }
 
+QString Collector::formatOutPath(QString dirPath,QString dirName) {
+    if(dirPath.isEmpty() == false && dirPath.at(dirPath.size()-1) == SLASH.at(0) ) {
+        dirPath.resize(dirPath.size()-1);
+    }
+
+    if(dirPath.isEmpty() == true) {
+        return "";
+    }
+    if(dirName.isEmpty() == true) {
+        return dirPath+SLASH;
+    }
+
+    return dirPath+SLASH+dirName+SLASH;
+}
+
