@@ -69,3 +69,21 @@ void Collector::dir(QFileInfo i) {
 
 }
 
+void Collector::file(QFileInfo i) {
+    if(i.isFile() == false || (i.isFile() == true && this->v_suffix.contains(i.suffix() ) == false) ) {
+        return;
+    }
+
+    QString n = i.baseName()+"."+i.suffix();
+    QFile* tF = new QFile(this->v_toPath+n);
+
+    if(tF->exists() == true) {
+        tF->remove();
+    }
+
+    delete tF;
+
+    QFile fF(this->v_fromPath+n);
+
+    fF.copy(this->v_toPath+n);
+}
