@@ -44,5 +44,7 @@ private:
 
     bool v_name;
 
+    void init(QString dataStr);
+
 };
 #endif // LIBRARYDATAWIDGET_H
