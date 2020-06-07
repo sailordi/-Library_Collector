@@ -3,6 +3,8 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QTextBlockFormat>
+#include <QTextCursor>
 #include <QTextEdit>
 #include <QPushButton>
 #include <QSpacerItem>
@@ -15,6 +17,27 @@ LibraryDataWidget::LibraryDataWidget(QGridLayout* l,QString dataStr,bool name,QW
     this->clearLayout(l);
 
     this->init(dataStr);
+}
+
+void LibraryDataWidget::setPath(QString str) {
+    this->v_pathE->setText(str);
+
+    QTextCursor cu = this->v_pathE->textCursor();
+
+    cu.movePosition(QTextCursor::Start);
+
+    while(cu.atEnd() == false) {
+        QTextBlockFormat text = cu.blockFormat();
+
+        text.setAlignment(Qt::AlignCenter);
+        cu.mergeBlockFormat(text);
+
+        if(cu.movePosition(QTextCursor::NextBlock) == false) {
+            break;
+        }
+    }
+
+    this->v_pathE->setTextCursor(cu);
 }
 
 //Private functions
