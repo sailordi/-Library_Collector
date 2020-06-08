@@ -1,6 +1,9 @@
 #ifndef MESSAGEHANDLER_H
 #define MESSAGEHANDLER_H
 
+#include <QPair>
+#include <QString>
+
 #include "Message/Notice/Notice.h"
 #include "Message/Notice/NoticeFlag.h"
 
@@ -18,6 +21,14 @@
 class MessageHandler
 {
 public:
+    /*! Checks if collection can be done
+     * \param output - The output path / name
+     * \param headerP - The header path
+     * \param releseP - The relese path
+     * \param debugP - The debug path
+     * \throws QPair<Notice*,NoticeFlag>
+    */
+    static void collectionCheck(QPair<QString,QString> output,QString headerP,QString releaseP,QString debugP);
 
 };
 #endif // MESSAGEHANDLER_H
