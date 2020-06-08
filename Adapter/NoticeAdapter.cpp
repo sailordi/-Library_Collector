@@ -25,3 +25,7 @@ QSharedPointer<NoticeList> NoticeAdapter::list() {
 
     return this->v_page->list(0);
 }
+
+void NoticeAdapter::add(Notice* n,NoticeFlag f) {
+    this->list()->add(n,f);
+}

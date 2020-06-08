@@ -4,16 +4,19 @@
 #include <QWidget>
 #include <QSharedPointer>
 
+class Notice;
 class NoticeList;
 class NoticePage;
 class WindowNotice;
+
+enum class NoticeFlag;
 
 /*! \class NoticeAdapter
  * \brief The class is an adapter against a NoticePage and the WindowNotice
  *
  * Incudes: QWidget & QSharedPointer
  *
- * Forward declarations: NoticeList,NoticePage & WindowNotice
+ * Forward declarations: Notice, NoticeList, NoticePage, WindowNotice & NoticeFlag
  *
  * \author Created by: Sailordi
  * \author Last to touch it: Sailordi
@@ -35,6 +38,12 @@ public:
      * @returns QSharedPointer<NoticeList>
     */
     QSharedPointer<NoticeList> list();
+
+    /*! Adds a Notice to the NoticeList the program uses
+     * @param n - The Notice
+     * @param f - The NoticeFlag [ERROR, WARNING, MESSAGE]
+    */
+    void add(Notice* n,NoticeFlag f);
 
 private:
     WindowNotice* v_windowN = nullptr;
