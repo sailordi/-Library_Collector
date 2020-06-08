@@ -11,6 +11,7 @@
 #include "WindowMainWidgets/LibraryDataWidget.h"
 
 const QString SETTINGS_PATH = "./Settings/",SETTINGS_FILE = "LibraryColectorData.libColSet";
+const QString DATA_SUFFIX = ".LibColData",FILTER = "Library collector Data(*"+DATA_SUFFIX+")";
 
 //Public functions
 WindowMain::WindowMain(QWidget *parent) : QMainWindow(parent), v_ui(new Ui::WindowMain) {
@@ -31,6 +32,8 @@ WindowMain::WindowMain(QWidget *parent) : QMainWindow(parent), v_ui(new Ui::Wind
     connect(this->v_releaseDataW->selectPathBtn(),&QPushButton::clicked,this,&WindowMain::libraryReleasePathBtnClicked);
 
     connect(this->v_ui->preformCollection_btn,&QPushButton::clicked,this,&WindowMain::preformCollectionBtnClicked);
+
+    connect(this->v_ui->actionSave_data,&QAction::triggered,this,&WindowMain::saveProgramData);
 
     this->loadWindowSettings();
 }
@@ -136,6 +139,49 @@ void WindowMain::preformCollectionBtnClicked() {
 
 
         this->v_noticeA->show();
+}
+
+void WindowMain::saveProgramData() {
+    QString str = QFileDialog::getSaveFileName(nullptr,"Save Library collect..",QString(),FILTER);
+
+    if(str.isEmpty() == true) {
+        return;
+    }
+
+    this->v_noticeA->reset("Library collector data saved");
+
+    Settings s(str);
+
+    s.startGroup("OutputData");
+
+    s.addBlockData("Path",this->v_outDataW->path() );
+    s.addBlockData("Name",this->v_outDataW->name() );
+
+    s.endGroup();
+
+    s.startGroup("HeaderData");
+
+    s.addBlockData("Path",this->v_headerDataW->path() );
+
+    s.endGroup();
+
+    s.startGroup("ReleaseData");
+
+    s.addBlockData("Path",this->v_releaseDataW->path() );
+
+    s.endGroup();
+
+    s.startGroup("DebugData");
+
+    s.addBlockData("Path",this->v_debugDataW->path() );
+
+    s.endGroup();
+
+    QFileInfo f(str);
+    this->v_noticeA->add(MessageHandler::saveLoadData(f.path(),f.fileName(),true),NoticeFlag::MESSAGE);
+
+
+    this->v_noticeA->show();
 }
 
 //Private functions
