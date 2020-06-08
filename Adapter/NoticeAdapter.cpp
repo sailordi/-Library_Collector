@@ -29,3 +29,12 @@ QSharedPointer<NoticeList> NoticeAdapter::list() {
 void NoticeAdapter::add(Notice* n,NoticeFlag f) {
     this->list()->add(n,f);
 }
+
+void NoticeAdapter::reset(QString title) {
+    this->v_windowN->setWindowTitle(title);
+
+    if(this->v_page->size() > 0) {
+        this->v_page->list(0)->clear();
+    }
+
+}

@@ -28,22 +28,27 @@ class NoticeAdapter
 {
 public:
     /*! Constructor
-     * @param parent - The WindowNotice parent [Default: nullptr]
+     * \param parent - The WindowNotice parent [Default: nullptr]
     */
     explicit NoticeAdapter(QWidget *parent = nullptr);
     /*! Deconstructor */
     ~NoticeAdapter();
 
     /*! Returns the NoticeList the program uses
-     * @returns QSharedPointer<NoticeList>
+     * \returns QSharedPointer<NoticeList>
     */
     QSharedPointer<NoticeList> list();
 
     /*! Adds a Notice to the NoticeList the program uses
-     * @param n - The Notice
-     * @param f - The NoticeFlag [ERROR, WARNING, MESSAGE]
+     * \param n - The Notice
+     * \param f - The NoticeFlag [ERROR, WARNING, MESSAGE]
     */
     void add(Notice* n,NoticeFlag f);
+
+    /*! Resets the data and sets the WindowNotice title
+     * \param title - The WindowNotice title
+    */
+    void reset(QString title);
 
 private:
     WindowNotice* v_windowN = nullptr;
