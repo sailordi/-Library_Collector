@@ -40,8 +40,8 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $${LIBRARI
 INCLUDEPATH += $${LIBRARIES_INCLUDE}/Message
 DEPENDPATH += $${LIBRARIES_INCLUDE}/Message
 
-win32:CONFIG(release, debug|release): LIBS += -L$${LIB_PATH} -lMessage
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$$${LIB_PATH} -lMessage_D
+win32:CONFIG(release, debug|release): LIBS += -L$${LIBRARIES_PATH} -lMessage
+else:win32:CONFIG(debug, debug|release): LIBS += -L$${LIBRARIES_PATH} -lMessage_D
 
 SOURCES += main.cpp \
     Adapter/NoticeAdapter.cpp \
