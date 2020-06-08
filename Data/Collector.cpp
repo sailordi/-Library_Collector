@@ -20,6 +20,10 @@ bool Collector::canCollect() {
     if(this->v_fromPath.isEmpty() == true) {
         return false;
     }
+    else if(this->v_fromPath.isEmpty() == false && QDir(this->v_fromPath).exists() == false) {
+
+    }
+
     if(this->v_toPath.isEmpty() == true) {
         return false;
     }
