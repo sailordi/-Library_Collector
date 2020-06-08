@@ -6,7 +6,7 @@
 #include "Base/Other/Helper.h"
 
 //Public functions
-void MessageHandler::collectionCheck(QPair<QString, QString> output,QString headerP,QString releaseP,QString debugP) {
+void MessageHandler::collectionCheck(QPair<QString,QString> output,QString headerP,QString releaseP,QString debugP) {
     QString tmp = "";
 
         if(output.first.isEmpty() == true) {
@@ -45,4 +45,8 @@ void MessageHandler::collectionCheck(QPair<QString, QString> output,QString head
           throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::ERROR);
         }
 
+}
+
+Notice* MessageHandler::collection() {
+    return new Notice("The collection has been performed");
 }

@@ -30,5 +30,10 @@ public:
     */
     static void collectionCheck(QPair<QString,QString> output,QString headerP,QString releaseP,QString debugP);
 
+    /*! Collection is done
+     * \returns Notice*
+    */
+    static Notice* collection();
+
 };
 #endif // MESSAGEHANDLER_H
