@@ -44,3 +44,7 @@ void NoticeAdapter::show() {
 
     this->v_windowN->show();
 }
+
+void NoticeAdapter::saveLoadSettings(Settings* s,bool save) {
+    (save == true) ? this->v_windowN->saveSettings(s) : this->v_windowN->loadSettings(s);
+}
