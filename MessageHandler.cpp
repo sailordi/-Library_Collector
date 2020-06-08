@@ -32,17 +32,27 @@ void MessageHandler::collectionCheck(QPair<QString,QString> output,QString heade
           tmp.append(Helper::newRow(2) );
         }
 
+        if(tmp.isEmpty() == false) {
+          throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::ERROR);
+        }
+        bool rP = false,dP = false;
+
         if(releaseP.isEmpty() == false && QDir(releaseP).exists() == false) {
             tmp.append("Release path no longer exist");
             tmp.append(Helper::newRow(2) );
+            rP = true;
         }
         if(debugP.isEmpty() == false && QDir(debugP).exists() == false) {
             tmp.append("Debug path no longer exist");
             tmp.append(Helper::newRow(2) );
+            dP = true;
         }
 
-        if(tmp.isEmpty() == false) {
-          throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::ERROR);
+        if(rP == true && dP == true) {
+            throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::ERROR);
+        }
+        else {
+            throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::WARNING);
         }
 
 }
