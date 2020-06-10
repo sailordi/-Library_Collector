@@ -33,14 +33,22 @@ public:
     MainInfoWidget(QGridLayout* l,QWidget* parent = nullptr);
 
     /*! Sets the output path
-     * \param outputPath - The outputh path
+     * \param outputPath - The output path
     */
     void setOutputPath(QString outputPath);
+    /*! Sets the header path
+     * \param headerPath - The header path
+    */
+    void setHeaderPath(QString headerPath);
 
     /*! Returns the output path
      * \returns QString
     */
     QString outputPath();
+    /*! Returns the header path
+     * \returns QString
+    */
+    QString headerPath();
 
 private:
     QTextEdit* v_outputPathE = nullptr,*v_headerPathE = nullptr;
