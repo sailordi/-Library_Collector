@@ -44,5 +44,8 @@ private:
 
     QSharedPointer<BuildData> v_oldBuildData;
 
+    /*! Initializes widgets that are used */
+    void init();
+
 };
 #endif // BUILDDATAWIDGET_H
