@@ -8,6 +8,8 @@
 #include <QSpacerItem>
 #include <QPushButton>
 
+#include "Data/BuildData.h"
+
 enum HLAYOUT{BUILD_NAMEL,DEBUG_PathL,RELEASE_PATHL,SIZEL};
 
 const int MAX_EDIT_HEIGHT = 80;
@@ -23,6 +25,24 @@ BuildDataWidget::BuildDataWidget(QGridLayout* l,QWidget* parent) : MultiLayoutWi
     }
 
     this->init();
+
+}
+
+void BuildDataWidget::setOldData(QSharedPointer<BuildData> data) {
+    this->v_oldBuildData = data;
+
+    this->v_buildNameE->setText(data->buildName() );
+    this->v_debugPathE->setText(data->debugPath() );
+    this->v_releasePathE->setText(data->releasePath() );
+}
+
+void BuildDataWidget::updateOldData() {
+    if(this->v_oldBuildData.isNull() == true) {
+        return;
+    }
+    this->v_oldBuildData->setBuildName(this->v_buildNameE->text() );
+    this->v_oldBuildData->setDebugPath(this->v_debugPathE->toPlainText() );
+    this->v_oldBuildData->setReleasePath(this->v_releasePathE->toPlainText() );
 
 }
 
