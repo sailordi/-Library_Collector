@@ -40,9 +40,17 @@ public:
      * \param data - The pointer to the data
     */
     void setOldData(QSharedPointer<BuildData> data);
+    /*! Setes the build name
+     * \param buildName - The build name
+    */
+    void setBuildName(QString buildName);
 
     /*! Updates the old data with the new data */
     void updateOldData();
+    /*! Returns the build name
+     * \param QString
+    */
+    QString buildName();
 
     /*! Clears all the data
      * \param onlyText - If only the text should be cleared

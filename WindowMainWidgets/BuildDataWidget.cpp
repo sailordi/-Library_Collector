@@ -36,6 +36,10 @@ void BuildDataWidget::setOldData(QSharedPointer<BuildData> data) {
     this->v_releasePathE->setText(data->releasePath() );
 }
 
+void BuildDataWidget::setBuildName(QString buildName) {
+    this->v_buildNameE->setText(buildName);
+}
+
 void BuildDataWidget::updateOldData() {
     if(this->v_oldBuildData.isNull() == true) {
         return;
@@ -44,6 +48,10 @@ void BuildDataWidget::updateOldData() {
     this->v_oldBuildData->setDebugPath(this->v_debugPathE->toPlainText() );
     this->v_oldBuildData->setReleasePath(this->v_releasePathE->toPlainText() );
 
+}
+
+QString BuildDataWidget::buildName() {
+    return this->v_buildNameE->text();
 }
 
 void BuildDataWidget::clear(bool onlyText) {
