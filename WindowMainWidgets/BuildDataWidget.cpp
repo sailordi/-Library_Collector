@@ -26,6 +26,17 @@ BuildDataWidget::BuildDataWidget(QGridLayout* l,QWidget* parent) : MultiLayoutWi
 
 }
 
+void BuildDataWidget::clear(bool onlyText) {
+    this->v_buildNameE->setText("");
+    this->v_debugPathE->setText("");
+    this->v_debugPathE->setText("");
+
+    if(onlyText == false) {
+        this->v_oldBuildData = nullptr;
+    }
+
+}
+
 //Private functions
 void BuildDataWidget::init() {
     QLabel* buildNameL = new QLabel("Library name",this->v_p);
