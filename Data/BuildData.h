@@ -10,11 +10,13 @@
  *
  * Incudes: QObject, QString & QStringList
  *
+ * Inherits: QObject
+ *
  * \author Created by: Sailordi
  * \author Last to touch it: Sailordi
  *
  * \date Created: 2020-06-10
- * \date Last update: 2020-06-10
+ * \date Last update: 2020-06-16
 */
 class BuildData : public QObject
 {

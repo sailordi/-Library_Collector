@@ -15,13 +15,13 @@ const QString SLASH = "/";
  *
  * Includes: QString & QStringList
  *
- *Forward declarations: QFileInfo
+ * Forward declarations: QFileInfo
  *
  * \author Created by: Sailordi
  * \author Last to touch it: Sailordi
  *
  * \date Created: 2020-06-06
- * \date Last update: 2020-06-06
+ * \date Last update: 2020-06-16
 */
 class Collector
 {

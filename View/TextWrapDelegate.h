@@ -13,7 +13,7 @@
  * \author Created by: Sailordi
  * \author Last to touch it: Sailordi
  *
- * \date Created: 2020-06-10
+ * \date Created: 2020-06-16
  * \date Last update: 2020-06-16
 */
 class TextWrapDelegate : public QStyledItemDelegate
