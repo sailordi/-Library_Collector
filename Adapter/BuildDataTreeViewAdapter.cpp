@@ -5,6 +5,7 @@
 #include <QStandardItemModel>
 #include <QStringList>
 
+#include "Adapter/PathItemCreator.h"
 #include "View/TextWrapDelegate.h"
 
 //Public functions
@@ -25,4 +26,19 @@ BuildDataTreeViewAdapter::BuildDataTreeViewAdapter() : TreeViewAdapterNoChildRow
     this->v_view->setStyleSheet(str);
     this->v_view->header()->setFont(QFont("Times New Roman",16) );
     this->view()->setFont(QFont("Times New Roman",16) );
+}
+
+//Private functions
+void BuildDataTreeViewAdapter::generateColumns(QList<QStandardItem*>& l,QList<QVariant> data) {
+    PathItemCreator c;
+
+        for(int i = 0; i < data.size(); i++) {
+            if(i == 0) {
+                l.push_back(this->v_itemCreator->nonEditable(data.at(i),Qt::AlignCenter) );
+            }
+            else {
+                 l.push_back(c.nonEditable(data.at(i),Qt::AlignCenter) );
+            }
+        }
+
 }
