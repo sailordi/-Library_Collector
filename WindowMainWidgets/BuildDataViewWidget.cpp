@@ -22,6 +22,20 @@ BuildDataViewWidget::~BuildDataViewWidget() {
     delete this->v_view;
 }
 
+void BuildDataViewWidget::update() {
+    this->v_view->clear();
+
+    for(int i = 0; i < this->v_buildDataList.size(); i++) {
+        BuildDataP d = this->v_buildDataList.at(i);
+
+        this->v_view->addData(i,{QVariant(d->buildName() ),QVariant(d->debugPath() ),QVariant(d->releasePath() )});
+    }
+
+    this->v_view->resize();
+
+    this->v_buildInfoL->setText("Build info ["+QString::number(this->v_buildDataList.size() )+"]");
+}
+
 QList<BuildDataP> BuildDataViewWidget::buildDataList() {
     return this->v_buildDataList;
 }
