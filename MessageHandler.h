@@ -32,6 +32,10 @@ public:
      * \throws QPair<Notice*,NoticeFlag>
     */
     static void errorAddBuldData(QList<BuildDataP> l,QString libraryBaseName,BuildDataP nD);
+    /*! Returns a message for build data being added being successful
+     * \returns Notice*
+    */
+    static Notice* addBuildData(BuildDataP d);
 
     /*! Checks if collection can be done
      * \param output - The output path / name
