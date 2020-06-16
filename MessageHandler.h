@@ -7,10 +7,14 @@
 #include "Message/Notice/Notice.h"
 #include "Message/Notice/NoticeFlag.h"
 
+#include "Data/BuildDataTypedefs.h"
+
+typedef QPair<Notice*,NoticeFlag> NoticePair;
+
 /*! \class MessageHandler
  * \brief The class handle all of the messages
  *
- * Incudes: Notice & NoticeFlag.h
+ * Incudes: Notice, NoticeFlag.h, BuildDataTypedefs.h
  *
  * \author Created by: Sailordi
  * \author Last to touch it: Sailordi
@@ -21,6 +25,14 @@
 class MessageHandler
 {
 public:
+    /*! Checks if build data can be added
+     * \param l - List with build data
+     * \param libraryName - The library base name
+     * \param nD - The new buld data to ckeck
+     * \throws QPair<Notice*,NoticeFlag>
+    */
+    static void errorAddBuldData(QList<BuildDataP> l,QString libraryBaseName,BuildDataP nD);
+
     /*! Checks if collection can be done
      * \param output - The output path / name
      * \param headerP - The header path
