@@ -3,13 +3,11 @@
 
 #include "Base/LayoutWidget/MultiLayoutWidget.h"
 
-#include <QSharedDataPointer>
+#include "Data/BuildDataTypedefs.h"
 
 class QLineEdit;
 class QTextEdit;
 class QPushButton;
-
-class BuildData;
 
 /*! \class BuildDataWidget
  * \brief The class contains widgets for adding/updating the build data
@@ -24,7 +22,7 @@ class BuildData;
  * \author Last to touch it: Sailordi
  *
  * \date Created: 2020-06-11
- * \date Last update: 2020-06-11
+ * \date Last update: 2020-06-16
 */
 class BuildDataWidget : public MultiLayoutWidget
 {
@@ -39,7 +37,7 @@ public:
     /*! Sets the old data pointer
      * \param data - The pointer to the data
     */
-    void setOldData(QSharedPointer<BuildData> data);
+    void setOldData(BuildDataP data);
     /*! Setes the build name
      * \param buildName - The build name
     */
@@ -55,6 +53,7 @@ public:
 
     /*! Updates the old data with the new data */
     void updateOldData();
+
     /*! Returns the build name
      * \param QString
     */
@@ -102,7 +101,7 @@ private:
     QPushButton* v_debugPathB = nullptr,*v_releasePathB = nullptr;
     QPushButton* v_resetBuildNameB = nullptr,*v_resetDebugPathB = nullptr,*v_resetReleasePathB = nullptr;
 
-    QSharedPointer<BuildData> v_oldBuildData;
+    BuildDataP v_oldBuildData;
 
     /*! Initializes widgets that are used */
     void init();

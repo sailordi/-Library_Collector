@@ -8,7 +8,7 @@ CONFIG -=debug_and_release
 CONFIG(release,debug|release)   { TARGET = Library_Collector }
 CONFIG(debug,debug|release)     { TARGET = Library_Collector_D }
 
-LIBRARIES_PATH = D:/Coding/Libs/Libraries_V4_2
+LIBRARIES_PATH = D:/Coding/Libs/Libraries_V4_2_1
 LIBRARIES_INCLUDE = $${LIBRARIES_PATH}/includes
 
 win32-g++ {
@@ -55,6 +55,7 @@ SOURCES += main.cpp \
 HEADERS += \
     Adapter/NoticeAdapter.h \
     Data/BuildData.h \
+    Data/BuildDataTypedefs.h \
     Data/Collector.h \
     MessageHandler.h \
     WindowMain.h \

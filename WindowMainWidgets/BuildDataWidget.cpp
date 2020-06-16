@@ -28,7 +28,7 @@ BuildDataWidget::BuildDataWidget(QGridLayout* l,QWidget* parent) : MultiLayoutWi
 
 }
 
-void BuildDataWidget::setOldData(QSharedPointer<BuildData> data) {
+void BuildDataWidget::setOldData(BuildDataP data) {
     this->v_oldBuildData = data;
 
     this->v_buildNameE->setText(data->buildName() );
