@@ -20,6 +20,8 @@ BuildDataViewWidget::BuildDataViewWidget(QGridLayout* l,QWidget* parent) : Singl
 BuildDataViewWidget::~BuildDataViewWidget() {
     this->v_view->clear();
     delete this->v_view;
+
+    this->clear();
 }
 
 void BuildDataViewWidget::update() {
@@ -50,6 +52,10 @@ int BuildDataViewWidget::numberOfSelectedRows() {
 
 QList<int> BuildDataViewWidget::selectedRowsPosition() {
     return this->v_view->selectedRowsPosition();
+}
+
+void BuildDataViewWidget::clear() {
+    this->v_buildDataList.clear();
 }
 
 //Private functions
