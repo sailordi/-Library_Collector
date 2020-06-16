@@ -9,7 +9,7 @@
 #include <QSize>
 
 //Public functions
-TextWrapDelegate::TextWrapDelegate(int extraWidth,int extraHeight,Qt::ItemDataRole role,QWidget* parent) : QStyledItemDelegate(parent) {
+TextWrapDelegate::TextWrapDelegate(int extraWidth,int extraHeight,int role,QWidget* parent) : QStyledItemDelegate(parent) {
     this->v_extraWidth = extraWidth;
     this->v_extraHeight = extraHeight;
     this->v_role = role;

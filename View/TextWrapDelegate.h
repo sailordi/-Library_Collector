@@ -25,7 +25,7 @@ public:
      * \param extraHeight - How much extra height the item should have
      * \param parent - The parent [Default: nullptr]
     */
-    TextWrapDelegate(int extraWidth,int extraHeight,Qt::ItemDataRole role,QWidget *parent = nullptr);
+    TextWrapDelegate(int extraWidth,int extraHeight,int role,QWidget *parent = nullptr);
 
     /*! Function to paint the delegate
      * \param painter - The painter to be used
@@ -42,8 +42,7 @@ public:
     QSize sizeHint(const QStyleOptionViewItem& option,const QModelIndex& index) const override;
 
 private:
-    int v_extraWidth = 0,v_extraHeight = 0;
-    Qt::ItemDataRole v_role = Qt::DisplayRole;
+    int v_extraWidth = 0,v_extraHeight = 0,v_role = Qt::DisplayRole;
 
 };
 #endif // TEXTWRAPDELEGATE_H
