@@ -56,24 +56,33 @@ public:
     void updateOldData();
 
     /*! Returns the build name
-     * \param QString
+     * \returns int
+    */
+    int oldDataPosition();
+    /*! Returns the build name
+     * \returns BuildDataP
+    */
+    BuildDataP oldData();
+
+    /*! Returns the build name
+     * \returns QString
     */
     QString buildName();
     /*! Returns the debug path
-     * \param QString
+     * \returns QString
     */
     QString debugPath();
-    /*! Returns the release
-     * \param QString
+    /*! Returns the release path
+     * \returns QString
     */
     QString releasePath();
 
     /*! Returns the debug path selection button
-     * \param QPushButton*
+     * \returns QPushButton*
     */
     QPushButton* debugPathButton();
     /*! Returns the release path selection button
-     * \param QPushButton*
+     * \returns QPushButton*
     */
     QPushButton* releasePathButton();
 
