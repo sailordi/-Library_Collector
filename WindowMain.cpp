@@ -233,11 +233,11 @@ void WindowMain::preformCollectionBtnClicked() {
             Collector::createPath(in);
             Collector::createPath(lib);
 
-            Collector cH(in+SLASH,headerP+SLASH,
+            Collector cH(headerP+SLASH,in,
                         {"h"},true);
-            Collector cD(lib+SLASH,b->debugPath()+SLASH,
+            Collector cD(b->debugPath()+SLASH,lib,
                         {"a","dll","lib","pdb"},false);
-            Collector cR(lib+SLASH,b->releasePath()+SLASH,
+            Collector cR(b->releasePath()+SLASH,lib,
                         {"a","dll","lib","pdb"},false);
 
             cH.collect();
