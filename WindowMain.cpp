@@ -35,6 +35,8 @@ WindowMain::WindowMain(QWidget *parent) : QMainWindow(parent), v_ui(new Ui::Wind
 
     connect(this->v_ui->preformCollection_btn,&QPushButton::clicked,this,&WindowMain::preformCollectionBtnClicked);
 
+    connect(this->v_ui->addUpdateBuildInfo_btn,&QPushButton::clicked,this,&WindowMain::addUpdateBtnClicked);
+
     connect(this->v_ui->actionSave_data,&QAction::triggered,this,&WindowMain::saveProgramData);
     connect(this->v_ui->actionLoad_data,&QAction::triggered,this,&WindowMain::loadProgramData);
 
@@ -121,6 +123,23 @@ void WindowMain::libraryReleasePathBtnClicked() {
         }
 
         this->v_buildDataW->setReleasePath(str);
+}
+
+void WindowMain::addUpdateBtnClicked() {
+    try {
+        if(this->v_ui->addUpdateBuildInfo_btn->text().compare("Add") == 0) {
+            this->addData();
+        }
+        else {
+            this->updateData();
+        }
+        this->v_buildDataViewW->update();
+        this->prepareBuildDataTab();
+    }catch(NoticePair p) {
+        this->v_noticeA->add(p.first,p.second);
+    }
+
+    this->v_noticeA->show();
 }
 
 void WindowMain::preformCollectionBtnClicked() {
