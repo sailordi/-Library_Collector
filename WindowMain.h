@@ -7,6 +7,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class WindowMain; }
 QT_END_NAMESPACE
 
+#include "Data/BuildDataTypedefs.h"
+
 class BuildDataViewWidget;
 class BuildDataWidget;
 class MainInfoWidget;
@@ -37,6 +39,12 @@ public:
     explicit WindowMain(QWidget *parent = nullptr);
     /*! Deconstructor */
     ~WindowMain();
+
+    /*! Preperes the build data tab for adding / updating data
+     * \param oldDataPosition - The old datas position in the data list [Default: -1]
+     * \param data - The pointer to the data [Default: BuildDataP()]
+    */
+    void prepareBuildDataTab(int oldDataPosition = -1,BuildDataP data = BuildDataP() );
 
 private slots:
     /*! Slot that is activated when output path selection button is clicked */

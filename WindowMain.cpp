@@ -39,6 +39,8 @@ WindowMain::WindowMain(QWidget *parent) : QMainWindow(parent), v_ui(new Ui::Wind
     connect(this->v_ui->actionLoad_data,&QAction::triggered,this,&WindowMain::loadProgramData);
 
     this->loadWindowSettings();
+
+    this->prepareBuildDataTab();
 }
 
 WindowMain::~WindowMain() {
@@ -51,6 +53,33 @@ WindowMain::~WindowMain() {
     delete this->v_mainInfoW;
 
     delete this->v_ui;
+}
+
+void WindowMain::prepareBuildDataTab(int oldDataPosition,BuildDataP data) {
+    this->v_buildDataW->clear(false);
+
+    if(data.isNull() == true) {
+        this->v_ui->addUpdateBuildInfo_btn->setText("Add");
+        this->v_buildDataW->hideResetButtons(true);
+
+        this->v_ui->cancelBuildInfoUpdate_btn->setHidden(true);
+
+        this->v_ui->buildInfoBtn_spacer2->changeSize(0,0,QSizePolicy::Ignored,QSizePolicy::Ignored);
+
+        this->v_ui->tabWidget->setCurrentIndex(0);
+    }
+    else {
+        this->v_ui->addUpdateBuildInfo_btn->setText("Update");
+        this->v_buildDataW->hideResetButtons(false);
+
+        this->v_ui->cancelBuildInfoUpdate_btn->setHidden(false);
+
+        this->v_ui->buildInfoBtn_spacer2->changeSize(40,20,QSizePolicy::Expanding,QSizePolicy::Expanding);
+
+        this->v_buildDataW->setOldData(oldDataPosition,data);
+
+        this->v_ui->tabWidget->setCurrentIndex(1);
+    }
 }
 
 //Private slots
