@@ -72,6 +72,14 @@ public:
      * \throws QPair<Notice*,NoticeFlag>
     */
     static void errorCollectionPreform(QString outputP,QString libraryBaseName,QString headerP,int builds);
+    /*! Checks if the collection was preformed without anny errors/warnings
+     * \param outpuPt - The output path
+     * \param libraryBaseName - The library base name
+     * \param headerP - The header path
+     * \param data - The build data
+     * \throws QPair<Notice*,NoticeFlag>
+    */
+    static void errorCollection(QString outputP,QString libraryBaseName,QString hederPath,BuildDataP data);
 
     /*! Collection is done
      * \returns Notice*
