@@ -293,6 +293,19 @@ void WindowMain::addData() {
         this->v_noticeA->add(MessageHandler::addBuildData(d),NoticeFlag::MESSAGE);
 }
 
+void WindowMain::updateData() {
+    BuildDataP nD(new BuildData({this->v_buildDataW->buildName(),this->v_buildDataW->debugPath(),this->v_buildDataW->releasePath()}) );
+    BuildDataP oD = this->v_buildDataW->oldData();
+    int oldDataPosition = this->v_buildDataW->oldDataPosition();
+
+        MessageHandler::errorUpdateBuildData(this->v_buildDataViewW->buildDataList(),this->v_mainInfoW->libraryBaseName(),
+                                             oldDataPosition,oD,nD);
+
+        this->v_noticeA->add(MessageHandler::updateBuildData(oD,nD),NoticeFlag::MESSAGE);
+
+        this->v_buildDataW->updateOldData();
+}
+
 void WindowMain::saveWindowSettings() {
     Settings s(SETTINGS_PATH+SETTINGS_FILE);
 
