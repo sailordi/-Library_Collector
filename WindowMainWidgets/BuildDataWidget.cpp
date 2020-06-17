@@ -106,7 +106,7 @@ void BuildDataWidget::hideResetButtons(bool hide) {
 void BuildDataWidget::clear(bool onlyText) {
     this->v_buildNameE->setText("");
     this->v_debugPathE->setText("");
-    this->v_debugPathE->setText("");
+    this->v_releasePathE->setText("");
 
     if(onlyText == false) {
         this->v_oldBuildData = nullptr;
@@ -136,9 +136,9 @@ void BuildDataWidget::resetReleasePath_clicked() {
 
 //Private functions
 void BuildDataWidget::init() {
-    QLabel* buildNameL = new QLabel("Library name",this->v_p);
-    QLabel* debugPathL = new QLabel("Library debug path",this->v_p);
-    QLabel* releasePathL = new QLabel("Library release path",this->v_p);
+    QLabel* buildNameL = new QLabel("Build name",this->v_p);
+    QLabel* debugPathL = new QLabel("Debug path",this->v_p);
+    QLabel* releasePathL = new QLabel("Release path",this->v_p);
 
     this->v_buildNameE = new QLineEdit(this->v_p);
     this->v_debugPathE = new QTextEdit(this->v_p);
