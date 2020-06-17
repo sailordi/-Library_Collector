@@ -56,6 +56,14 @@ public:
     */
     static Notice* removeBuildData(BuildDataP d);
 
+    /*! Checks if selection can be done
+     * \param size - The build data list size
+     * \param selected - The amount of data selected
+     * \param update - Fi the selection is for updating data
+     * \throws QPair<Notice*,NoticeFlag>
+    */
+    static void errorSelection(int size,int selected,bool update);
+
     /*! Checks if collection can be done
      * \param output - The output path / name
      * \param headerP - The header path
