@@ -283,15 +283,15 @@ void MessageHandler::errorSelection(int size,int selected,bool update) {
         }
 }
 
-void MessageHandler::collectionCheck(QPair<QString,QString> output,QString headerP,QString releaseP,QString debugP) {
+void MessageHandler::errorCollectionPreform(QString outputP,QString libraryBaseName,QString headerP,int builds) {
     QString tmp = "";
 
-        if(output.first.isEmpty() == true) {
+        if(outputP.isEmpty() == true) {
           tmp.append("Output path is missing");
           tmp.append(Helper::newRow(2) );
         }
-        if(output.second.isEmpty() == true) {
-          tmp.append("Output name is missing");
+        if(libraryBaseName.isEmpty() == true) {
+          tmp.append("Library base name is missing");
           tmp.append(Helper::newRow(2) );
         }
 
@@ -304,34 +304,11 @@ void MessageHandler::collectionCheck(QPair<QString,QString> output,QString heade
             tmp.append(Helper::newRow(2) );
         }
 
-        if(releaseP.isEmpty() == true && debugP.isEmpty() == true) {
-          tmp.append("Release and debug path is missing, only one can be missing");
-          tmp.append(Helper::newRow(2) );
+        if(builds <= 0) {
+            tmp.append("No build data have been added");
         }
 
-        if(tmp.isEmpty() == false) {
-          throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::ERROR);
-        }
-        bool rP = false,dP = false;
-
-        if(releaseP.isEmpty() == false && QDir(releaseP).exists() == false) {
-            tmp.append("Release path no longer exist");
-            tmp.append(Helper::newRow(2) );
-            rP = true;
-        }
-        if(debugP.isEmpty() == false && QDir(debugP).exists() == false) {
-            tmp.append("Debug path no longer exist");
-            tmp.append(Helper::newRow(2) );
-            dP = true;
-        }
-
-        if(rP == true && dP == true) {
-            throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::ERROR);
-        }
-        else {
-            throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::WARNING);
-        }
-
+        throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::ERROR);
 }
 
 Notice* MessageHandler::collection() {

@@ -64,14 +64,14 @@ public:
     */
     static void errorSelection(int size,int selected,bool update);
 
-    /*! Checks if collection can be done
-     * \param output - The output path / name
+    /*! Checks if collection can be preformed
+     * \param outpuPt - The output path
+     * \param libraryBaseName - The library base name
      * \param headerP - The header path
-     * \param releseP - The relese path
-     * \param debugP - The debug path
+     * \param builds - The build data list size
      * \throws QPair<Notice*,NoticeFlag>
     */
-    static void collectionCheck(QPair<QString,QString> output,QString headerP,QString releaseP,QString debugP);
+    static void errorCollectionPreform(QString outputP,QString libraryBaseName,QString headerP,int builds);
 
     /*! Collection is done
      * \returns Notice*
