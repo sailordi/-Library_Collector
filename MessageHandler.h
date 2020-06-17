@@ -51,6 +51,11 @@ public:
     */
     static Notice* updateBuildData(BuildDataP oD,BuildDataP nD);
 
+    /*! Returns a message for build data being removed
+     * \returns Notice*
+    */
+    static Notice* removeBuildData(BuildDataP d);
+
     /*! Checks if collection can be done
      * \param output - The output path / name
      * \param headerP - The header path
