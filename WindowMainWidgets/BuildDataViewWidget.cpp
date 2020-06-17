@@ -68,4 +68,6 @@ void BuildDataViewWidget::init() {
 
     this->v_vLayout->addWidget(this->v_buildInfoL);
     this->v_vLayout->addWidget(this->v_view->view() );
+
+    this->update();
 }
