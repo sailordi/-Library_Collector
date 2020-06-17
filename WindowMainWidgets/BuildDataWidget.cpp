@@ -28,7 +28,8 @@ BuildDataWidget::BuildDataWidget(QGridLayout* l,QWidget* parent) : MultiLayoutWi
 
 }
 
-void BuildDataWidget::setOldData(BuildDataP data) {
+void BuildDataWidget::setOldData(int oldDataPosition,BuildDataP data) {
+    this->v_oldDataPosition = oldDataPosition;
     this->v_oldBuildData = data;
 
     this->v_buildNameE->setText(data->buildName() );
@@ -91,6 +92,7 @@ void BuildDataWidget::clear(bool onlyText) {
 
     if(onlyText == false) {
         this->v_oldBuildData = nullptr;
+        this->v_oldDataPosition = -1;
     }
 
 }

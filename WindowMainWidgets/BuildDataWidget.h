@@ -34,10 +34,11 @@ public:
     */
     explicit BuildDataWidget(QGridLayout* l,QWidget *parent = nullptr);
 
-    /*! Sets the old data pointer
+    /*! Sets the old data
+     * \param oldDataPosition - The old datas position in the data list
      * \param data - The pointer to the data
     */
-    void setOldData(BuildDataP data);
+    void setOldData(int oldDataPosition,BuildDataP data);
     /*! Setes the build name
      * \param buildName - The build name
     */
@@ -101,6 +102,7 @@ private:
     QPushButton* v_debugPathB = nullptr,*v_releasePathB = nullptr;
     QPushButton* v_resetBuildNameB = nullptr,*v_resetDebugPathB = nullptr,*v_resetReleasePathB = nullptr;
 
+    int v_oldDataPosition = -1;
     BuildDataP v_oldBuildData;
 
     /*! Initializes widgets that are used */
