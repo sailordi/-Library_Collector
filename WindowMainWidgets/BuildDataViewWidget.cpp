@@ -15,6 +15,7 @@ BuildDataViewWidget::BuildDataViewWidget(QVBoxLayout* l,QWidget* parent) : Singl
 
     this->v_vLayout =  l;
 
+    this->init();
 }
 
 BuildDataViewWidget::~BuildDataViewWidget() {
