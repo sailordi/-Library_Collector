@@ -191,6 +191,51 @@ void MessageHandler::errorUpdateBuildData(QList<BuildDataP> l,QString libraryBas
 
 }
 
+Notice* MessageHandler::updateBuildData(BuildDataP oD,BuildDataP nD) {
+    QString str = "";
+
+    if(oD->buildName().compare(nD->buildName() ) != 0 && oD->buildName().isEmpty() == true) {
+        str.append("Build name was empty is now ");
+        str.append(nD->buildName() );
+    }
+    else if(oD->buildName().compare(nD->buildName() ) != 0 && oD->buildName().isEmpty() == false) {
+        str.append("Build name was "+oD->buildName()+" is now ");
+        str.append(nD->buildName() );
+    }
+    else {
+        str.append("Build name has not been changed");
+    }
+    str.append(Helper::newRow(2) );
+
+    if(oD->debugPath().compare(nD->debugPath() ) != 0 && oD->debugPath().isEmpty() == true) {
+        str.append("Debug path was empty"+Helper::newRow()+"  is now "+Helper::newRow() );
+        str.append(nD->debugPath() );
+    }
+    else if(oD->debugPath().compare(nD->debugPath() ) != 0 && oD->debugPath().isEmpty() == false) {
+        str.append("Debug path was "+Helper::newRow()+oD->debugPath()+Helper::newRow()+" is now "+Helper::newRow() );
+        str.append(nD->debugPath() );
+    }
+    else {
+        str.append("Debug path has not been changed");
+    }
+    str.append(Helper::newRow() );
+
+    if(oD->releasePath().compare(nD->releasePath() ) != 0 && oD->releasePath().isEmpty() == true) {
+        str.append("Release path was empty"+Helper::newRow()+"  is now "+Helper::newRow() );
+        str.append(nD->releasePath() );
+    }
+    else if(oD->releasePath().compare(nD->releasePath() ) != 0 && oD->releasePath().isEmpty() == false) {
+        str.append("Release path was "+Helper::newRow()+oD->releasePath()+Helper::newRow()+" is now "+Helper::newRow() );
+        str.append(nD->releasePath() );
+    }
+    else {
+        str.append("Release path has not been changed");
+    }
+    str.append(Helper::newRow(2) );
+
+    return new Notice(str);
+}
+
 void MessageHandler::collectionCheck(QPair<QString,QString> output,QString headerP,QString releaseP,QString debugP) {
     QString tmp = "";
 
