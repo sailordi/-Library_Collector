@@ -53,9 +53,19 @@ void BuildDataWidget::updateOldData() {
     if(this->v_oldBuildData.isNull() == true) {
         return;
     }
-    this->v_oldBuildData->setBuildName(this->v_buildNameE->text() );
-    this->v_oldBuildData->setDebugPath(this->v_debugPathE->toPlainText() );
-    this->v_oldBuildData->setReleasePath(this->v_releasePathE->toPlainText() );
+    QString bN = this->v_buildNameE->text();
+    QString dP = this->v_debugPathE->toPlainText();
+    QString rP = this->v_releasePathE->toPlainText();
+
+    if(bN.isEmpty() == false) {
+        this->v_oldBuildData->setBuildName(bN);
+    }
+    if(dP.isEmpty() == false) {
+        this->v_oldBuildData->setDebugPath(dP);
+    }
+    if(rP.isEmpty() == false) {
+        this->v_oldBuildData->setReleasePath(rP);
+    }
 
 }
 
