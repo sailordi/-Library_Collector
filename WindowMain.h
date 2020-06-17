@@ -1,4 +1,4 @@
-#ifndef WINDOWMAIN_H
+﻿#ifndef WINDOWMAIN_H
 #define WINDOWMAIN_H
 
 #include <QMainWindow>
@@ -63,12 +63,15 @@ private slots:
     /*! Slot that is activated when the cancel update button is clicked */
     void cancelUpdateBtnClicked();
 
+    /*! Slot that is activated when update selected build data menu item is clicked */
+    void updateSelectedBuildData();
+
     /*! Slot that is activated when preform collection button is clicked */
     void preformCollectionBtnClicked();
 
-    /*! Saves the program data */
+    /*! Saves the program data menu item clicked */
     void saveProgramData();
-    /*! Loads the program data */
+    /*! Loads the program data menu item clicked */
     void loadProgramData();
 
 private:

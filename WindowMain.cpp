@@ -146,6 +146,23 @@ void WindowMain::cancelUpdateBtnClicked() {
     this->prepareBuildDataTab();
 }
 
+void WindowMain::updateSelectedBuildData() {
+    int size = this->v_buildDataViewW->buildDataList().size(),selected = this->v_buildDataViewW->numberOfSelectedRows();
+
+        this->v_noticeA->reset("Update build data");
+
+        try {
+            MessageHandler::errorSelection(size,selected,true);
+            int index = this->v_buildDataViewW->selectedRowsPosition().first();
+
+            this->prepareBuildDataTab(index,this->v_buildDataViewW->buildDataList().at(index) );
+        }catch(NoticePair p) {
+            this->v_noticeA->add(p.first,p.second);
+            this->v_noticeA->show();
+        }
+
+}
+
 void WindowMain::preformCollectionBtnClicked() {
     QString outP = this->v_mainInfoW->outputPath();
     QString libraryBaseName = this->v_mainInfoW->libraryBaseName();
