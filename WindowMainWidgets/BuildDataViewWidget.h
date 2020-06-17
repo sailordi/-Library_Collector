@@ -35,7 +35,7 @@ public:
      * \param l - The layout for the build data view widgets
      * \param parent - The parent [Default: nullptr]
     */
-    explicit BuildDataViewWidget(QGridLayout* l,QWidget *parent = nullptr);
+    explicit BuildDataViewWidget(QVBoxLayout* l,QWidget *parent = nullptr);
     /*! Deconstructor */
     ~BuildDataViewWidget();
 

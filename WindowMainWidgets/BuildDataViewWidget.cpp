@@ -10,10 +10,10 @@
 #include "Data/BuildData.h"
 
 //Public functions
-BuildDataViewWidget::BuildDataViewWidget(QGridLayout* l,QWidget* parent) : SingleLayoutWidget(parent) {
+BuildDataViewWidget::BuildDataViewWidget(QVBoxLayout* l,QWidget* parent) : SingleLayoutWidget(parent) {
     this->clearLayout(l);
 
-    this->v_gLayout =  l;
+    this->v_vLayout =  l;
 
 }
 
@@ -65,8 +65,6 @@ void BuildDataViewWidget::init() {
 
     this->v_buildInfoL->setAlignment(Qt::AlignCenter);
 
-    int row = 0;
-
-    this->v_gLayout->addWidget(this->v_buildInfoL,row++,0,1,1);
-    this->v_gLayout->addWidget(this->v_view->view(),row++,0,1,1);
+    this->v_vLayout->addWidget(this->v_buildInfoL);
+    this->v_vLayout->addWidget(this->v_view->view() );
 }
