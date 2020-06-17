@@ -376,8 +376,35 @@ void MessageHandler::errorCollection(QString outputP,QString libraryBaseName,QSt
 
 }
 
-Notice* MessageHandler::collection() {
-    return new Notice("The collection has been performed");
+Notice* MessageHandler::collection(QString outputP,QString libraryBaseName,QString hederPath,BuildDataP data) {
+    QString str = "";
+
+        str.append("Library headers and library files has been collected");
+        str.append(Helper::newRow() );
+        str.append("Library output path: "+outputP);
+        str.append(Helper::newRow() );
+        str.append("Library base name: "+libraryBaseName );
+        str.append(Helper::newRow(2) ) ;
+        str.append("Headers path: "+Helper::newRow()+hederPath);
+        str.append(Helper::newRow(2) );
+
+        str.append("Build name: "+data->buildName()+Helper::newRow() );
+        if(data->debugPath().isEmpty() == false) {
+            str.append("Debug path: "+Helper::newRow()+data->debugPath() );
+        }
+        else {
+            str.append("Debug path is empty");
+        }
+        str.append(Helper::newRow() );
+        if(data->releasePath().isEmpty() == false) {
+            str.append("Release path: "+Helper::newRow()+data->releasePath() );
+        }
+        else {
+            str.append("Release path is empty");
+        }
+        str.append(Helper::newRow() );
+
+        return new Notice(str);
 }
 
 Notice* MessageHandler::saveLoadData(QString path,QString fileName,bool save) {

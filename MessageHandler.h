@@ -80,11 +80,14 @@ public:
      * \throws QPair<Notice*,NoticeFlag>
     */
     static void errorCollection(QString outputP,QString libraryBaseName,QString hederPath,BuildDataP data);
-
     /*! Collection is done
+     * \param outpuPt - The output path
+     * \param libraryBaseName - The library base name
+     * \param headerP - The header path
+     * \param data - The build data
      * \returns Notice*
     */
-    static Notice* collection();
+    static Notice* collection(QString outputP,QString libraryBaseName,QString hederPath,BuildDataP data);
 
     /*! Data is saved / loaded
      * \param path - Path the data was saved to
