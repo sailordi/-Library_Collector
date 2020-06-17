@@ -142,6 +142,10 @@ void WindowMain::addUpdateBtnClicked() {
     this->v_noticeA->show();
 }
 
+void WindowMain::cancelUpdateBtnClicked() {
+    this->prepareBuildDataTab();
+}
+
 void WindowMain::preformCollectionBtnClicked() {
     QString outP = this->v_mainInfoW->outputPath();
     QString libraryBaseName = this->v_mainInfoW->libraryBaseName();
