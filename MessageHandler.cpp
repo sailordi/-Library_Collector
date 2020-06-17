@@ -102,6 +102,95 @@ Notice* MessageHandler::addBuildData(BuildDataP d) {
         return new Notice(str);
 }
 
+void MessageHandler::errorUpdateBuildData(QList<BuildDataP> l,QString libraryBaseName,int oldDataPos,BuildDataP oD,BuildDataP nD) {
+    QString str = "";
+    QStringList oL = {oD->buildName(),oD->debugPath(),oD->releasePath()};
+    QStringList nL = {nD->buildName(),nD->debugPath(),nD->releasePath()};
+    bool empty = true,same = true;
+
+        for(int i = 0; i < oL.size(); i++) {
+            if(nL.at(i).isEmpty() == false) {
+                empty = false;
+            }
+            else {
+                nL.replace(i,oL.at(i) );
+            }
+            if(nL.at(i).compare(oL.at(i) ) != 0) {
+                same = false;
+            }
+
+        }
+
+        if(empty == true) {
+            str.append("No data has been entered");
+            str.append(Helper::newRow() );
+        }
+        if(same == true) {
+            str.append("No data has changed");
+            str.append(Helper::newRow() );
+        }
+
+        if(str.isEmpty() == false) {
+            throw NoticePair(new Notice(str),NoticeFlag::ERROR);
+        }
+
+        if(nD->buildName().compare(libraryBaseName) == 0) {
+            str.append("Build name is the same as library base name");
+            str.append(Helper::newRow() );
+        }
+        if(nD->debugPath().isEmpty() == false && nD->releasePath().isEmpty() == false
+                && nD->debugPath().compare(nD->releasePath() ) == 0 ) {
+                str.append("Debug and relese path are the same");
+                str.append(Helper::newRow() );
+        }
+
+        if(str.isEmpty() == false) {
+            throw NoticePair(new Notice(str),NoticeFlag::ERROR);
+        }
+        bool f = false,d = false,r = false,b  = false;
+        l.removeAt(oldDataPos);
+
+        for(int i = 0; i < l.size(); i++) {
+            BuildDataP bD = l.at(i);
+
+            if(bD->buildName().compare(nD->buildName() ) == 0) {
+                b = true;
+                f = true;
+            }
+            if(bD->debugPath().compare(nD->debugPath() ) == 0) {
+                d = true;
+                f = true;
+            }
+            if(bD->releasePath().compare(nD->releasePath() ) == 0) {
+                r = true;
+                f = true;
+            }
+
+            if(f == true) {
+                i  = l.size();
+            }
+
+        }
+
+        if(b == true) {
+            str.append("Build name already exists in the build data list");
+            str.append(Helper::newRow() );
+        }
+        if(d == true) {
+            str.append("Debug path already exists in the build data list");
+            str.append(Helper::newRow() );
+        }
+        if(r == true) {
+            str.append("Release path already exists in the build data list");
+            str.append(Helper::newRow() );
+        }
+
+        if(str.isEmpty() == false) {
+            throw NoticePair(new Notice(str),NoticeFlag::ERROR);
+        }
+
+}
+
 void MessageHandler::collectionCheck(QPair<QString,QString> output,QString headerP,QString releaseP,QString debugP) {
     QString tmp = "";
 

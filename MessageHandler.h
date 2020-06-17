@@ -27,8 +27,8 @@ class MessageHandler
 public:
     /*! Checks if build data can be added
      * \param l - List with build data
-     * \param libraryName - The library base name
-     * \param nD - The new buld data to ckeck
+     * \param libraryBaseName - The library base name
+     * \param nD - The new buld data to check
      * \throws QPair<Notice*,NoticeFlag>
     */
     static void errorAddBuldData(QList<BuildDataP> l,QString libraryBaseName,BuildDataP nD);
@@ -36,6 +36,16 @@ public:
      * \returns Notice*
     */
     static Notice* addBuildData(BuildDataP d);
+
+    /*! Checks if build data can be updated
+     * \param l - List with build data
+     * \param libraryBaseName - The library base name
+     * \param oldDataPos - The old data position in the data list
+     * \param oD - The old build data
+     * \param nD - The updated build data to check
+     * \throws QPair<Notice*,NoticeFlag>
+    */
+    static void errorUpdateBuildData(QList<BuildDataP> l,QString libraryBaseName,int oldDataPos,BuildDataP oD,BuildDataP nD);
 
     /*! Checks if collection can be done
      * \param output - The output path / name
