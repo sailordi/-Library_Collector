@@ -36,6 +36,10 @@ WindowMain::WindowMain(QWidget *parent) : QMainWindow(parent), v_ui(new Ui::Wind
     connect(this->v_ui->preformCollection_btn,&QPushButton::clicked,this,&WindowMain::preformCollectionBtnClicked);
 
     connect(this->v_ui->addUpdateBuildInfo_btn,&QPushButton::clicked,this,&WindowMain::addUpdateBtnClicked);
+    connect(this->v_ui->cancelBuildInfoUpdate_btn,&QPushButton::clicked,this,&WindowMain::cancelUpdateBtnClicked);
+
+    connect(this->v_ui->actionUpdateSelectedBuildData,&QAction::triggered,this,&WindowMain::updateSelectedBuildData);
+    connect(this->v_ui->actionRemoveSelectedBuildData,&QAction::triggered,this,&WindowMain::removeSelectedBuildData);
 
     connect(this->v_ui->actionSave_data,&QAction::triggered,this,&WindowMain::saveProgramData);
     connect(this->v_ui->actionLoad_data,&QAction::triggered,this,&WindowMain::loadProgramData);
@@ -161,6 +165,32 @@ void WindowMain::updateSelectedBuildData() {
             this->v_noticeA->show();
         }
 
+}
+
+void WindowMain::removeSelectedBuildData() {
+    int size = this->v_buildDataViewW->buildDataList().size(),selected = this->v_buildDataViewW->numberOfSelectedRows();
+
+        this->v_noticeA->reset("Remove build data");
+
+        try {
+            MessageHandler::errorSelection(size,selected,false);
+        }catch(NoticePair p) {
+            this->v_noticeA->add(p.first,p.second);
+            this->v_noticeA->show();
+            return;
+        }
+
+        QList<int> selectedNumbers = this->v_buildDataViewW->selectedRowsPosition();
+        QList<BuildDataP>* dataL = this->v_buildDataViewW->buildDataListP();
+
+        for(int i = selected -1; i >= 0; i--) {
+            BuildDataP d = dataL->takeAt(selectedNumbers.at(i) );
+
+            this->v_noticeA->add(MessageHandler::removeBuildData(d),NoticeFlag::MESSAGE);
+        }
+        this->v_buildDataViewW->update();
+
+        this->v_noticeA->show();
 }
 
 void WindowMain::preformCollectionBtnClicked() {
