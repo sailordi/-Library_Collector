@@ -308,7 +308,9 @@ void MessageHandler::errorCollectionPreform(QString outputP,QString libraryBaseN
             tmp.append("No build data have been added");
         }
 
-        throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::ERROR);
+        if(tmp.isEmpty() == false) {
+            throw QPair<Notice*,NoticeFlag>(new Notice(tmp),NoticeFlag::ERROR);
+        }
 }
 
 void MessageHandler::errorCollection(QString outputP,QString libraryBaseName,QString hederPath,BuildDataP data) {
