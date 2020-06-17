@@ -75,6 +75,9 @@ private:
 
     NoticeAdapter* v_noticeA = nullptr;
 
+    /*! Adds data to the build data list */
+    void addData();
+
     /*! Saves the windows settings */
     void saveWindowSettings();
     /*! Loads the windows settings */
