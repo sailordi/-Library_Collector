@@ -1,6 +1,7 @@
 #include "WindowMain.h"
 #include "ui_WindowMain.h"
 
+#include <QActionGroup>
 #include <QFileDialog>
 
 #include "Base/Settings/Settings.h"
@@ -43,6 +44,11 @@ WindowMain::WindowMain(QWidget *parent) : QMainWindow(parent), v_ui(new Ui::Wind
 
     connect(this->v_ui->actionSave_data,&QAction::triggered,this,&WindowMain::saveProgramData);
     connect(this->v_ui->actionLoad_data,&QAction::triggered,this,&WindowMain::loadProgramData);
+
+    QActionGroup* collectOptions = new QActionGroup(this);
+
+    collectOptions->addAction(this->v_ui->actionCollectAllBuildDataToTheSameFolder);
+    collectOptions->addAction(this->v_ui->actionCollectAllBuildDataToDifferentFolders);
 
     this->loadWindowSettings();
 
@@ -225,7 +231,7 @@ void WindowMain::preformCollectionBtnClicked() {
                     w = true;
                 }
             }
-            QString destP  = Collector::formatOutPath(outP,libraryBaseName+b->buildName() );
+            QString destP = Collector::formatOutPath(outP,libraryBaseName+b->buildName() );
             QString in = Collector::formatOutPath(destP,"includes");
             QString lib = Collector::formatOutPath(destP,"libs");
 
@@ -384,6 +390,8 @@ void WindowMain::saveWindowSettings() {
         QPoint pos = this->pos();
 
         s.addBlockData("Pos",pos);
+        s.addBlockData("SameFolder",this->v_ui->actionCollectAllBuildDataToTheSameFolder->isChecked() );
+        s.addBlockData("KeepAddingData",this->v_ui->actionKeepAddingBuildData->isChecked() );
 
         s.endGroup();
 
@@ -396,7 +404,13 @@ void WindowMain::loadWindowSettings() {
         s.startGroup("WindowMain");
 
         QPoint pos = s.getBlockData("Pos",QPoint(100,100) ).toPoint();
+        bool sA = s.getBlockData("SameFolder",false).toBool();
+        bool kA = s.getBlockData("KeepAddingdata",false).toBool();
 
+
+        this->v_ui->actionCollectAllBuildDataToTheSameFolder->setChecked(sA);
+        this->v_ui->actionCollectAllBuildDataToDifferentFolders->setChecked(!sA);
+        this->v_ui->actionKeepAddingBuildData->setChecked(kA);
         this->move(pos);
 
         s.endGroup();
