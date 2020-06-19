@@ -215,50 +215,11 @@ void WindowMain::preformCollectionBtnClicked() {
             return;
         }
 
-        for(int i = 0; i < l.size(); i++) {
-            BuildDataP b = this->v_buildDataViewW->buildDataList().at(i);
-            bool w = false;
-
-            try {
-                MessageHandler::errorCollection(outP,libraryBaseName,headerP,b);
-            }catch(QPair<Notice*,NoticeFlag> p) {
-                this->v_noticeA->add(p.first,p.second);
-
-                if(p.second == NoticeFlag::ERROR) {
-                    continue;
-                }
-                else {
-                    w = true;
-                }
-            }
-            QString destP = Collector::formatOutPath(outP,libraryBaseName+b->buildName() );
-            QString in = Collector::formatOutPath(destP,"includes");
-            QString lib = Collector::formatOutPath(destP,"libs");
-
-            Collector::createPath(destP);
-            Collector::createPath(in);
-            Collector::createPath(lib);
-
-            Collector cH(headerP+SLASH,in,
-                        {"h"},true);
-            Collector cD(b->debugPath()+SLASH,lib,
-                        {"a","dll","lib","pdb"},false);
-            Collector cR(b->releasePath()+SLASH,lib,
-                        {"a","dll","lib","pdb"},false);
-
-            cH.collect();
-
-            if(cD.canCollect() == true) {
-                cD.collect();
-            }
-            if(cR.canCollect() == true) {
-                cR.collect();
-            }
-
-            if(w == false) {
-                this->v_noticeA->add(MessageHandler::collection(outP,libraryBaseName,headerP,b),NoticeFlag::MESSAGE);
-            }
-
+        if(this->v_ui->actionCollectAllBuildDataToTheSameFolder->isChecked() == false) {
+            this->collectionDiffrenFolders(outP,libraryBaseName,headerP,l);
+        }
+        else {
+            this->collectionSameFolder(outP,libraryBaseName,headerP,l);
         }
 
         this->v_noticeA->show();
@@ -380,6 +341,107 @@ void WindowMain::updateData() {
         this->v_noticeA->add(MessageHandler::updateBuildData(oD,nD),NoticeFlag::MESSAGE);
 
         this->v_buildDataW->updateOldData();
+}
+
+void WindowMain::collectionDiffrenFolders(QString outP,QString libraryBaseName,QString headerP,QList<BuildDataP> l) {
+    for(int i = 0; i < l.size(); i++) {
+        BuildDataP b = this->v_buildDataViewW->buildDataList().at(i);
+        bool w = false;
+
+        try {
+            MessageHandler::errorCollection(outP,libraryBaseName,headerP,b);
+        }catch(QPair<Notice*,NoticeFlag> p) {
+            this->v_noticeA->add(p.first,p.second);
+
+            if(p.second == NoticeFlag::ERROR) {
+                continue;
+            }
+            else {
+                w = true;
+            }
+        }
+        QString destP = Collector::formatOutPath(outP,libraryBaseName+b->buildName() );
+        QString in = Collector::formatOutPath(destP,"includes");
+        QString lib = Collector::formatOutPath(destP,"libs");
+
+        Collector::createPath(destP);
+        Collector::createPath(in);
+        Collector::createPath(lib);
+
+        Collector cH(headerP+SLASH,in,
+                    {"h"},true);
+        Collector cD(b->debugPath()+SLASH,lib,
+                    {"a","dll","lib","pdb"},false);
+        Collector cR(b->releasePath()+SLASH,lib,
+                    {"a","dll","lib","pdb"},false);
+
+        cH.collect();
+
+        if(cD.canCollect() == true) {
+            cD.collect();
+        }
+        if(cR.canCollect() == true) {
+            cR.collect();
+        }
+
+        if(w == false) {
+            this->v_noticeA->add(MessageHandler::collection(outP,libraryBaseName,headerP,b),NoticeFlag::MESSAGE);
+        }
+
+    }
+
+}
+
+void WindowMain::collectionSameFolder(QString outP,QString libraryBaseName,QString headerP,QList<BuildDataP> l) {
+    QString destP = Collector::formatOutPath(outP,libraryBaseName );
+    QString in = Collector::formatOutPath(destP,"includes");
+
+    Collector::createPath(destP);
+    Collector::createPath(in);
+
+    Collector cH(headerP+SLASH,in,
+                {"h"},true);
+
+    cH.collect();
+
+    for(int i = 0; i < l.size(); i++) {
+        BuildDataP b = this->v_buildDataViewW->buildDataList().at(i);
+        bool w = false;
+
+        try {
+            MessageHandler::errorCollection(outP,libraryBaseName,headerP,b);
+        }catch(QPair<Notice*,NoticeFlag> p) {
+            this->v_noticeA->add(p.first,p.second);
+
+            if(p.second == NoticeFlag::ERROR) {
+                continue;
+            }
+            else {
+                w = true;
+            }
+        }
+        QString lib = Collector::formatOutPath(destP,b->buildName() );
+
+        Collector::createPath(lib);
+
+        Collector cD(b->debugPath()+SLASH,lib,
+                    {"a","dll","lib","pdb"},false);
+        Collector cR(b->releasePath()+SLASH,lib,
+                    {"a","dll","lib","pdb"},false);
+
+        if(cD.canCollect() == true) {
+            cD.collect();
+        }
+        if(cR.canCollect() == true) {
+            cR.collect();
+        }
+
+        if(w == false) {
+            this->v_noticeA->add(MessageHandler::collection(outP,libraryBaseName,headerP,b),NoticeFlag::MESSAGE);
+        }
+
+    }
+
 }
 
 void WindowMain::saveWindowSettings() {
