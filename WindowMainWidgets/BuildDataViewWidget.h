@@ -9,7 +9,6 @@
 #include "Data/BuildDataTypedefs.h"
 
 class QLabel;
-
 class BuildDataTreeViewAdapter;
 
 /*! \class BuildDataViewWidget
@@ -17,15 +16,15 @@ class BuildDataTreeViewAdapter;
  *
  * Incudes: QList, QString, BuildDataTypedefs.h & SingleLayoutWidget
  *
- * Forward declarations: QFileInfo
+ * Forward declarations: QLabel & BuildDataTreeViewAdapter
  *
- * Inherits: QLabel & BuildDataTreeViewAdapter
+ * Inherits: SingleLayoutWidget
  *
  * \author Created by: Sailordi
  * \author Last to touch it: Sailordi
  *
  * \date Created: 2020-06-16
- * \date Last update: 2020-06-16
+ * \date Last update: 2020-06-21
 */
 class BuildDataViewWidget : public SingleLayoutWidget
 {

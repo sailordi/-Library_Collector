@@ -61,7 +61,6 @@ void BuildDataViewWidget::clear() {
 
 //Private functions
 void BuildDataViewWidget::init() {
-
     this->v_buildInfoL = new QLabel(this->v_p);
     this->v_view = new BuildDataTreeViewAdapter();
 
