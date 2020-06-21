@@ -36,7 +36,7 @@ void BuildDataViewWidget::update() {
 
     this->v_view->resize();
 
-    this->v_buildInfoL->setText("Build info ["+QString::number(this->v_buildDataList.size() )+"]");
+    this->v_buildInfoL->setText("Build data ["+QString::number(this->v_buildDataList.size() )+"]");
 }
 
 QList<BuildDataP> BuildDataViewWidget::buildDataList() {
@@ -61,7 +61,8 @@ void BuildDataViewWidget::clear() {
 
 //Private functions
 void BuildDataViewWidget::init() {
-    this->v_buildInfoL = new QLabel("Build info [0]",this->v_p);
+
+    this->v_buildInfoL = new QLabel(this->v_p);
     this->v_view = new BuildDataTreeViewAdapter();
 
     this->v_buildInfoL->setAlignment(Qt::AlignCenter);
