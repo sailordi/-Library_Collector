@@ -275,7 +275,7 @@ void MessageHandler::errorAddExcludePath(QList<QString> l,QString headerPath,QSt
             str = "Exclude path is the same as header path"+Helper::newRow(2)
                           +excludePath+Helper::newRow();
         }
-        if(str.isEmpty() == true && excludePath.contains(headerPath) == true) {
+        if(str.isEmpty() == true && excludePath.contains(headerPath) == false) {
             str = "Exclude path is not in header path"+Helper::newRow(2)
                           +excludePath+Helper::newRow();
         }
@@ -305,7 +305,7 @@ void MessageHandler::errorUpdateExcludePath(QList<QString> l,QString headerPath,
         str = "Exclude path is the same as header path"+Helper::newRow(2)
                       +excludePath+Helper::newRow();
     }
-    if(str.isEmpty() == true && excludePath.contains(headerPath) == true) {
+    if(str.isEmpty() == true && excludePath.contains(headerPath) == false) {
         str = "Exclude path is not in header path"+Helper::newRow(2)
                       +excludePath+Helper::newRow();
     }
