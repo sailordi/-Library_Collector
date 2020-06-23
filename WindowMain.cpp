@@ -216,6 +216,8 @@ void WindowMain::addExcludePath() {
         QString hP = this->v_mainInfoW->headerPath();
         QList<QString>* l = this->v_excludedPathsW->excludedPathsListP();
 
+        this->v_noticeA->reset("Add exclude path");
+
         try {
             MessageHandler::errorAddExcludePath(*l,hP,str);
         }catch(NoticePair p) {
@@ -232,6 +234,8 @@ void WindowMain::addExcludePath() {
 void WindowMain::updateSelectedExcludePath() {
     QString hP = this->v_mainInfoW->headerPath();
     QList<QString>* l = this->v_excludedPathsW->excludedPathsListP();
+
+        this->v_noticeA->reset("Update selected exclude path");
 
         try {
             MessageHandler::errorSelection(l->size(),this->v_excludedPathsW->numberOfSelectedRows(),false);
@@ -263,6 +267,8 @@ void WindowMain::updateSelectedExcludePath() {
 
 void WindowMain::removeSelectedExcludePath() {
     QList<QString>* l = this->v_excludedPathsW->excludedPathsListP();
+
+        this->v_noticeA->reset("Remove selected exclude path");
 
         try {
             MessageHandler::errorSelection(l->size(),this->v_excludedPathsW->numberOfSelectedRows(),true);
@@ -424,6 +430,7 @@ void WindowMain::loadProgramData() {
     delete s;
 
     this->v_buildDataViewW->update();
+    this->v_excludedPathsW->update();
 
     QFileInfo f(str);
     this->v_noticeA->add(MessageHandler::saveLoadData(f.path(),f.fileName(),false),NoticeFlag::MESSAGE);
@@ -482,7 +489,7 @@ void WindowMain::collectionDiffrenFolders(QString outP,QString libraryBaseName,Q
         Collector::createPath(in);
         Collector::createPath(lib);
 
-        Collector cH(headerP+SLASH,in,
+        Collector cH(headerP+SLASH,in,this->v_excludedPathsW->excludedPathsList(),
                     {"h"},true);
         Collector cD(b->debugPath()+SLASH,lib,
                     {"a","dll","lib","pdb"},false);
@@ -513,7 +520,7 @@ void WindowMain::collectionSameFolder(QString outP,QString libraryBaseName,QStri
     Collector::createPath(destP);
     Collector::createPath(in);
 
-    Collector cH(headerP+SLASH,in,
+    Collector cH(headerP+SLASH,in,this->v_excludedPathsW->excludedPathsList(),
                 {"h"},true);
 
     cH.collect();
