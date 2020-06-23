@@ -47,6 +47,7 @@ WindowMain::WindowMain(QWidget *parent) : QMainWindow(parent), v_ui(new Ui::Wind
 
     connect(this->v_ui->actionAddExcludedPath,&QAction::triggered,this,&WindowMain::addExcludePath);
     connect(this->v_ui->actionUpdateSelectedExcludedPath,&QAction::triggered,this,&WindowMain::updateSelectedExcludePath);
+    connect(this->v_ui->actionRemoveSelectedExcludedPath,&QAction::triggered,this,&WindowMain::removeSelectedExcludePath);
 
     connect(this->v_ui->actionSave_data,&QAction::triggered,this,&WindowMain::saveProgramData);
     connect(this->v_ui->actionLoad_data,&QAction::triggered,this,&WindowMain::loadProgramData);
@@ -256,6 +257,26 @@ void WindowMain::updateSelectedExcludePath() {
         }
 
         l->replace(oldPos,str);
+
+        this->v_excludedPathsW->update();
+}
+
+void WindowMain::removeSelectedExcludePath() {
+    QList<QString>* l = this->v_excludedPathsW->excludedPathsListP();
+
+        try {
+            MessageHandler::errorSelection(l->size(),this->v_excludedPathsW->numberOfSelectedRows(),true);
+        }catch(NoticePair p) {
+            this->v_noticeA->add(p.first,p.second);
+            this->v_noticeA->show();
+            return;
+        }
+
+        QList<int> s = this->v_excludedPathsW->selectedRowsPosition();
+
+        for(int i = s.size()-1; i >= 0; i--) {
+            l->removeAt(s.at(i) );
+        }
 
         this->v_excludedPathsW->update();
 }
