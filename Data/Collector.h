@@ -21,35 +21,43 @@ const QString SLASH = "/";
  * \author Last to touch it: Sailordi
  *
  * \date Created: 2020-06-06
- * \date Last update: 2020-06-16
+ * \date Last update: 2020-06-23
 */
 class Collector
 {
 public:
     /*! Constructor
-     * @param fromPath - The path to search for files
-     * @param toPath - The output path
-     * @param suffix - Suffixes to copy
-     * @param createDirs - If dirs should be created inside the output path [Default: true]
+     * \param fromPath - The path to search for files
+     * \param toPath - The output path
+     * \param suffix - Suffixes to copy
+     * \param createDirs - If dirs should be created inside the output path [Default: true]
     */
     Collector(QString fromPath,QString toPath,QStringList suffix,bool createDirs = true);
+    /*! Constructor
+     * \param fromPath - The path to search for files
+     * \param toPath - The output path
+     * \param excludedPaths - The paths to exclude
+     * \param suffix - Suffixes to copy
+     * \param createDirs - If dirs should be created inside the output path [Default: true]
+    */
+    Collector(QString fromPath,QString toPath,QList<QString> excludedPaths,QStringList suffix,bool createDirs = true);
     /*! Deconstructor */
     ~Collector();
 
     /*! Checks if collection can be preformed
-     * @returns bool
+     * \returns bool
     */
     bool canCollect();
 
     /*! Formats the output path string
-     * @param dirPath - The dirs path
-     * @param dirName - The dirs name
-     * @returns QString
+     * \param dirPath - The dirs path
+     * \param dirName - The dirs name
+     * \returns QString
     */
     static QString formatOutPath(QString dirPath,QString dirName);
 
     /*! Creates a folder if it does not already exist
-     * @param path - The full path of the folder to be created
+     * \param path - The full path of the folder to be created
     */
     static void createPath(QString path);
 
@@ -60,13 +68,14 @@ private:
     QString v_fromPath = "",v_toPath = "";
     bool v_createDirs;
     QStringList v_suffix;
+    QList<QString> v_excludedPaths;
 
     /*! Creates a folder in the output path and performs collection of the dirs files
-     * @param i - The file info
+     * \param i - The file info
     */
     void dir(QFileInfo i);
     /*! Copying the file into the output path
-     * @param i - The file info
+     * \param i - The file info
     */
     void file(QFileInfo i);
 
