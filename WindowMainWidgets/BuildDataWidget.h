@@ -22,7 +22,7 @@ class QPushButton;
  * \author Last to touch it: Sailordi
  *
  * \date Created: 2020-06-11
- * \date Last update: 2020-06-16
+ * \date Last update: 2020-06-23
 */
 class BuildDataWidget : public MultiLayoutWidget
 {
@@ -55,11 +55,11 @@ public:
     /*! Updates the old data with the new data */
     void updateOldData();
 
-    /*! Returns the build name
+    /*! Returns the old data position
      * \returns int
     */
     int oldDataPosition();
-    /*! Returns the build name
+    /*! Returns the old data
      * \returns BuildDataP
     */
     BuildDataP oldData();
