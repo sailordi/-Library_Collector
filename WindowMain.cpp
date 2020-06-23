@@ -4,6 +4,7 @@
 #include <QActionGroup>
 #include <QFileDialog>
 
+#include "Base/Other/Helper.h"
 #include "Base/Settings/Settings.h"
 
 #include "MessageHandler.h"
@@ -45,6 +46,7 @@ WindowMain::WindowMain(QWidget *parent) : QMainWindow(parent), v_ui(new Ui::Wind
     connect(this->v_ui->actionRemoveSelectedBuildData,&QAction::triggered,this,&WindowMain::removeSelectedBuildData);
 
     connect(this->v_ui->actionAddExcludedPath,&QAction::triggered,this,&WindowMain::addExcludePath);
+    connect(this->v_ui->actionUpdateSelectedExcludedPath,&QAction::triggered,this,&WindowMain::updateSelectedExcludePath);
 
     connect(this->v_ui->actionSave_data,&QAction::triggered,this,&WindowMain::saveProgramData);
     connect(this->v_ui->actionLoad_data,&QAction::triggered,this,&WindowMain::loadProgramData);
@@ -222,6 +224,38 @@ void WindowMain::addExcludePath() {
         }
 
         l->push_back(str);
+
+        this->v_excludedPathsW->update();
+}
+
+void WindowMain::updateSelectedExcludePath() {
+    QString hP = this->v_mainInfoW->headerPath();
+    QList<QString>* l = this->v_excludedPathsW->excludedPathsListP();
+
+        try {
+            MessageHandler::errorSelection(l->size(),this->v_excludedPathsW->numberOfSelectedRows(),false);
+        }catch(NoticePair p) {
+            this->v_noticeA->add(p.first,p.second);
+            this->v_noticeA->show();
+            return;
+        }
+        int oldPos = this->v_excludedPathsW->selectedRowsPosition().first();
+        QString oldPath = l->at(oldPos);
+        QString str = QFileDialog::getExistingDirectory(nullptr,"Update path to exclude old path:"+Helper::newRow()+oldPath+"...","");
+
+        if(str.isEmpty() == true) {
+            return;
+        }
+
+        try {
+            MessageHandler::errorUpdateExcludePath(*l,hP,oldPos,oldPath,str);
+        }catch(NoticePair p) {
+            this->v_noticeA->add(p.first,p.second);
+            this->v_noticeA->show();
+            return;
+        }
+
+        l->replace(oldPos,str);
 
         this->v_excludedPathsW->update();
 }
