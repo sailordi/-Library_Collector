@@ -11,6 +11,7 @@ QT_END_NAMESPACE
 
 class BuildDataViewWidget;
 class BuildDataWidget;
+class ExcludePathsViewWidget;
 class MainInfoWidget;
 class NoticeAdapter;
 
@@ -19,7 +20,7 @@ class NoticeAdapter;
  *
  * Incudes: QMainWindow
  *
- * Forward declarations: LibraryDataWidget
+ * Forward declarations: BuildDataViewWidget, BuildDataWidget, ExcludePathsViewWidget, MainInfoWidget  & NoticeAdapter
  *
  * Inherits: QMainWindow
  *
@@ -27,7 +28,7 @@ class NoticeAdapter;
  * \author Last to touch it: Sailordi
  *
  * \date Created: 2020-06-06
- * \date Last update: 2020-06-06
+ * \date Last update: 2020-06-23
 */
 class WindowMain : public QMainWindow
 {
@@ -82,6 +83,7 @@ private:
     MainInfoWidget* v_mainInfoW = nullptr;
     BuildDataViewWidget* v_buildDataViewW = nullptr;
     BuildDataWidget* v_buildDataW = nullptr;
+    ExcludePathsViewWidget* v_excludedPathsW = nullptr;
 
     NoticeAdapter* v_noticeA = nullptr;
 
