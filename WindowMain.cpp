@@ -44,6 +44,8 @@ WindowMain::WindowMain(QWidget *parent) : QMainWindow(parent), v_ui(new Ui::Wind
     connect(this->v_ui->actionUpdateSelectedBuildData,&QAction::triggered,this,&WindowMain::updateSelectedBuildData);
     connect(this->v_ui->actionRemoveSelectedBuildData,&QAction::triggered,this,&WindowMain::removeSelectedBuildData);
 
+    connect(this->v_ui->actionAddExcludedPath,&QAction::triggered,this,&WindowMain::addExcludePath);
+
     connect(this->v_ui->actionSave_data,&QAction::triggered,this,&WindowMain::saveProgramData);
     connect(this->v_ui->actionLoad_data,&QAction::triggered,this,&WindowMain::loadProgramData);
 
@@ -200,6 +202,28 @@ void WindowMain::removeSelectedBuildData() {
         this->v_buildDataViewW->update();
 
         this->v_noticeA->show();
+}
+
+void WindowMain::addExcludePath() {
+    QString str = QFileDialog::getExistingDirectory(nullptr,"Add path to exclude...","");
+
+        if(str.isEmpty() == true) {
+            return;
+        }
+        QString hP = this->v_mainInfoW->headerPath();
+        QList<QString>* l = this->v_excludedPathsW->excludedPathsListP();
+
+        try {
+            MessageHandler::errorAddExcludePath(*l,hP,str);
+        }catch(NoticePair p) {
+            this->v_noticeA->add(p.first,p.second);
+            this->v_noticeA->show();
+            return;
+        }
+
+        l->push_back(str);
+
+        this->v_excludedPathsW->update();
 }
 
 void WindowMain::preformCollectionBtnClicked() {
