@@ -5,6 +5,9 @@ The program collects .h files into a folder named includes in the output folder 
 
 The program collects .a,.dll and .lib files into a folder named lib in the output folder from the release / debug build folder or both folders. 
 
+The program can collect data for multiple different builds.
+The data can be collected to the same folder or separate folders for each build  
+
 ## V1:
 ```
 Created the project
@@ -43,4 +46,14 @@ Added stot that is activated when add/update button is clicked
 Added a slot that is activated when the cancel update button is clicked
 Added a slot that is activated when update selected build data menu item is clicked
 Added a slot that is activated when remove selected build data menu item is clicked
+```
+## V4:
+```
+Added new elements to the ui and renamed others
+Added two functions that will preform collection in diffrent ways
+Created the class ExcludePathsViewWidget that contains widgets/data for the exclude path view
+Added a variable and constructor to the Collector class
+Added a slot that is activated when add exclude path is clicke
+Added a slot that is activated when update selected exclude path is clicked
+Added a slot that is activated when remoev selectde exclude path is clicked
 ```
